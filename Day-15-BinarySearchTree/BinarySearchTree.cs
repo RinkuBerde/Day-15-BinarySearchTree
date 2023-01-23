@@ -5,55 +5,60 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Day_15_BinarySearchTree
-{ 
-        class BinarySearchTree<T> where T : IComparable<T>
+{
+    class BinarySearchTree<T> where T : IComparable<T>
+    {
+        public T NodeData { get; set; }
+        public BinarySearchTree<T> leftTree { get; set; }
+        public BinarySearchTree<T> rightTree { get; set; }
+        public BinarySearchTree(T nodeData)
         {
-            public T NodeData { get; set; }
-            public BinarySearchTree<T> leftTree { get; set; }
-            public BinarySearchTree<T> rightTree { get; set; }
-            public BinarySearchTree(T nodeData)
+            this.NodeData = nodeData;
+            this.rightTree = null;
+            this.leftTree = null;
+        }
+        static int leftCount = 0, rightCount = 0;
+        bool result = false;
+        public void Insert(T item)
+        {
+            T currentNodeValue = this.NodeData;
+            if ((currentNodeValue.CompareTo(item)) > 0)
             {
-                this.NodeData = nodeData;
-                this.rightTree = null;
-                this.leftTree = null;
-            }
-            static int leftCount = 0, rightCount = 0;
-            bool result = false;
-            public void Insert(T item)
-            {
-                T currentNodeValue = this.NodeData;
-                if ((currentNodeValue.CompareTo(item)) > 0)
+                if (this.leftTree == null)
                 {
-                    if (this.leftTree == null)
-                    {
-                        // leftCount++;
-                        this.leftTree = new BinarySearchTree<T>(item);
-                    }
-                    else
-                        this.leftTree.Insert(item);
+                    leftCount++;
+                    this.leftTree = new BinarySearchTree<T>(item);
                 }
                 else
-                {
-                    if (this.rightTree == null)
-                    {
-                        //rightCount++;
-                        this.rightTree = new BinarySearchTree<T>(item);
-                    }
-                    else
-                        this.rightTree.Insert(item);
-                }
+                    this.leftTree.Insert(item);
             }
-            public void Display()
+            else
             {
-                if (this.leftTree != null)
+                if (this.rightTree == null)
                 {
-                    this.leftTree.Display();
+                    rightCount++;
+                    this.rightTree = new BinarySearchTree<T>(item);
                 }
-                Console.WriteLine(this.NodeData.ToString());
-                if (this.rightTree != null)
-                {
-                    this.rightTree.Display();
-                }
+                else
+                    this.rightTree.Insert(item);
             }
-        }   
+        }
+        public void Display()
+        {
+            if (this.leftTree != null)
+            {
+                this.leftTree.Display();
+            }
+            Console.WriteLine(this.NodeData.ToString());
+            if (this.rightTree != null)
+            {
+                this.rightTree.Display();
+            }
+        }
+        public void GetSize()
+        {
+            Console.WriteLine("Size" + " " + (1 + leftCount + rightCount));
+        }
+    }
+      
 }

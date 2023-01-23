@@ -6,7 +6,9 @@
         {
             Console.WriteLine("Welcome to Binary Search Tree Practice problems!!!");
             Console.WriteLine("\n1. Create Binary Search Tree byadding 56 and then adding 30 & 70");
-            Console.Write("Enter your choice : ");
+            Console.WriteLine("2. Create binary tree as show in the figure also show size");
+
+          Console.Write("Enter your choice : ");
             int option = Convert.ToInt32(Console.ReadLine());
             BinarySearchTree<int> binarySearch = new BinarySearchTree<int>(56);
             switch (option)
@@ -15,6 +17,23 @@
                     binarySearch.Insert(30);
                     binarySearch.Insert(70);
                     binarySearch.Display();
+                    break;
+                case 2:
+                    binarySearch.Insert(30);
+                    binarySearch.Insert(70);
+                    binarySearch.Insert(22);
+                    binarySearch.Insert(40);
+                    binarySearch.Insert(60);
+                    binarySearch.Insert(95);
+                    binarySearch.Insert(11);
+                    binarySearch.Insert(65);
+                    binarySearch.Insert(3);
+                    binarySearch.Insert(16);
+                    binarySearch.Insert(63);
+                    binarySearch.Insert(67);
+                    Console.WriteLine("Binary Search Tree (in inorder traversal) is :");
+                    binarySearch.Display();
+                    binarySearch.GetSize();
                     break;
                 default:
                     Console.WriteLine("Enter valid option!!!");
